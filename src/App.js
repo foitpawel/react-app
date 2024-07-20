@@ -1,76 +1,16 @@
 // /** @jsxImportSource @emotion/react */
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import {theme} from "./helpers/theme";
+import CountriesList from "./components/CountriesList";
 
-const API_URL_ALL = "https://restcountries.com/v3.1/all";
-
-const App = () => {
-  const [countries, setCountries] = useState([]);
-  const [filter, setFilter] = useState();
-
-  const fetchApi = async () => {
-      const response = await fetch(API_URL_ALL);
-      const data = await response.json();
-
-      setCountries(data);
-  };
-
-  useEffect(() => {
-    fetchApi()
-  }, []);
-
-  const data = countries.map(el => {
-    return {
-      name: el.name.common,
-      capital: el.capital,
-      population: el.population,
-      flagUrl: el.flags.png,
-    }
-  });
-
-  const filterFunction = (data, filter) => {
-    if(!filter) return data;
-    return data.filter(el => el.name.toLowerCase().includes(filter));
-  };
-
-  const handleChangeFilter = evt => {
-    setFilter(evt.target.value);
-    filterFunction();
-  }
-
-  console.log(filter);
-  console.log(data);
-
-
-  // console.log(countries);
-
-  // console.log(data);
-
-  return (
-    <div style={styles.root}>
-      <h1 style={styles.header}>Countries</h1>
-      <h2 style={styles.header2}>Type to find your country</h2>
-      <input 
-        onChange={handleChangeFilter}
-        style={styles.input}
-        placeholder="Country name"
-      />
-      <div style={styles.grid}>
-        {filterFunction(data, filter).map(el => (
-          <div key={el.name} style={styles.countryBox(el.flagUrl)}>
-            <div style={styles.text}>
-              <div>{el.name}</div>
-              <div>{el.capital}</div>
-              <div>{el.population}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+const App = () => (
+  <div style={styles.root}>
+    <h1 style={styles.header}>Countries</h1>
+    <h2 style={styles.header2}>Type to find your country</h2>
+    <CountriesList />
+  </div>
+);
 
 const styles = {
   root: {
@@ -80,8 +20,7 @@ const styles = {
     minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
-    backgroundImage: `url("${"https://scontent-waw1-1.xx.fbcdn.net/v/t1.6435-9/118597283_3275426359173530_6728826168838114822_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=300f58&_nc_ohc=1YmH9IbacLQAX9c7qsn&_nc_ht=scontent-waw1-1.xx&oh=00_AfAzHdtni3MQ8Tdlbs2SPu75EVp2x1l1uN88Ia4EgkOf1g&oe=656E2CF7"}")`,
-
+    backgroundImage: `url("${"https://blog.hootsuite.com/wp-content/uploads/2021/07/free-stock-photos-12.jpeg"}")`,
     // display: 'block',
     position: 'absolute',
     left: 0,
@@ -94,46 +33,12 @@ const styles = {
   },
   header: {
     justifyContent: 'center',
-    fontSize: 34,
+    fontSize: 36,
   },
   header2: {
     justifyContent: 'center',
     fontSize: 26,
   },
-  input: {
-    margin : 24,
-    width: 300,
-    padding: 8,
-  },
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: '320px 320px 320px',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    height: '95vh',
-    overflow: 'scroll',
-  },
-  countryBox: imageSrc => ({
-    width: 300,
-    height: 220,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: theme.radius * 2,
-    margin: theme.gutterMedium,
-    backgroundImage: `url("${imageSrc}")`,
-    opacity: 0.8,
-    backgroundRepeat: 'no-repeat',
-    // backgroundSize: 'cover',
-  }),
-  text: {
-    fontSize: 16,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-
 };
 
 export default App;
