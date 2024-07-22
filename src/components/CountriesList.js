@@ -90,6 +90,7 @@ const styles = {
     justifyContent: 'center',
     height: '70vh',
     overflow: 'scroll',
+    overflowX: 'hidden',
   },
 };
 

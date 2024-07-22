@@ -30,6 +30,7 @@ const styles = {
     opacity: 0.95,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    overflow: 'hidden',
   },
   header: {
     justifyContent: 'center',
