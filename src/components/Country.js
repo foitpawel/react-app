@@ -41,7 +41,7 @@ const styles = {
   },
   typo: {
     color: 'fff',
-    fontSize: 24,
+    fontSize: 28,
   }
 };
 
