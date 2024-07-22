@@ -1,9 +1,8 @@
 // /** @jsxImportSource @emotion/react */
 
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
 import Country from "./Country";
-import {theme} from "../helpers/theme";
 
 const API_URL_ALL = "https://restcountries.com/v3.1/all";
 
@@ -13,14 +12,10 @@ const CountriesList = () => {
 
   const fetchApi = async () => {
     const response = await fetch(API_URL_ALL);
-    const data = await response.json();
-
-    setCountries(data);
+    return await response.json();
   };
 
-  useEffect(() => {
-    fetchApi()
-  }, []);
+  (() => fetchApi().then(data => setCountries(data)))();
 
   const data = countries.map(el => {
     return {
