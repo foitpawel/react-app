@@ -35,10 +35,12 @@ const styles = {
   header: {
     justifyContent: 'center',
     fontSize: 36,
+    opacity: 0.7,
   },
   header2: {
     justifyContent: 'center',
     fontSize: 26,
+    opacity: 0.6,
   },
 };
 
