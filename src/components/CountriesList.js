@@ -4,18 +4,15 @@ import React, {useState} from "react";
 
 import Country from "./Country";
 
+import {fetchApi} from "../helpers/common"
+
 const API_URL_ALL = "https://restcountries.com/v3.1/all";
 
 const CountriesList = () => {
   const [countries, setCountries] = useState([]);
   const [filter, setFilter] = useState();
 
-  const fetchApi = async () => {
-    const response = await fetch(API_URL_ALL);
-    return await response.json();
-  };
-
-  (() => fetchApi().then(data => setCountries(data)))();
+  (() => fetchApi(API_URL_ALL).then(data => setCountries(data)))();
 
   const data = countries.map(el => {
     return {
